@@ -1,7 +1,11 @@
 <template>
 <div class="container mt-4">
     <h1 class="mb-4">Jobs</h1>
+
     <div class="row g-4">
+        <div v-if="list.length === 0" class="col-12">
+          <h1 class="text-center">No jobs available</h1>
+        </div>
         <div class="col-md-4" v-for="item in list" :key="item.id">
             <div class="card h-100">
                 <img class="card-img-top" :src="item.job_profile_pic" alt="Job Image">
@@ -50,7 +54,8 @@
                 <label for="end_date">End Date</label>
                 <input type="date" class="form-control mb-2" v-model="job.end_date" id="end_date">
                 <textarea class="form-control mb-2" placeholder="Description" v-model="job.description"></textarea>
-                <input type="file" class="form-control mb-3" @change="onFileselected">
+                <label for="profile">Display Picture</label>
+                <input type="file" id="profile" class="form-control mb-3" @change="onFileselected">
                 <button type="button" class="btn btn-primary" @click="save_job">
                     Save
                 </button>

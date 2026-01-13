@@ -16,13 +16,15 @@
       <div class="modal-body">
            <div class="card p-4">
     <input class="form-control " placeholder="Title" v-model="job.title">
-    <select class="form-control mb-2" v-model="job.status">
+    <label for="status">Status</label>
+    <select class="form-control mb-2" v-model="job.status" id="status">
         <option value="draft">Draft</option>
         <option value="requested">Requested</option>
         <option value="posted">Posted</option>
         <option value="filled">Filled</option>
       </select>
-    <select class="form-control mb-2" v-model="job.category">
+      <label for="category">Category</label>
+    <select class="form-control mb-2" v-model="job.category" id="category">
         <option value="full_time">Full Time</option>
         <option value="part_time">Part Time</option>
         <option value="Internship">Internship</option>
@@ -31,8 +33,9 @@
             <input class="form-control mb-2" placeholder="Address" v-model="job.address">
       <input class="form-control mb-2" placeholder="City" v-model="job.city">
       <input class="form-control mb-2" placeholder="State" v-model="job.state">
-
-      <input type="date" class="form-control mb-2" v-model="job.start_date">
+ <label for="start">Start date</label>
+      <input type="date"  id="start" class="form-control mb-2" v-model="job.start_date">
+      <label for="end">End Date</label>
       <input type="date" class="form-control mb-2" v-model="job.end_date">
 
       <textarea class="form-control mb-2" placeholder="Description" v-model="job.description"></textarea>
