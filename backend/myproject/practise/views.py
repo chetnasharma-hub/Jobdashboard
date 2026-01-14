@@ -42,3 +42,31 @@ def duplicate_job(request, pk):
             {"error": "Job not found"},
             status=status.HTTP_404_NOT_FOUND
         )
+
+
+
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from django.db.models import Count
+from .models import Job
+
+class JobStatusStatsAPIView(APIView):
+    def get(self, request):
+        data = (
+            Job.objects
+            .values('status')
+            .annotate(count=Count('id'))
+        )
+
+        total = Job.objects.count()
+
+        result = []
+        for item in data:
+            percentage = (item['count'] / total) * 100 if total > 0 else 0
+            result.append({
+                "status": item['status'],
+                "count": item['count'],
+                "percentage": round(percentage, 2)
+            })
+
+        return Response(result)

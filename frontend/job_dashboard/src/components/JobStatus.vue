@@ -50,7 +50,7 @@ export default {
 
   async mounted() {
     const res = await axios.get(
-      "http://localhost:8000/api/job-status-stats/"
+      "http://localhost:8000/job-status-stats/"
     )
 
     this.chartData.labels = res.data.map(

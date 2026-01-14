@@ -4,19 +4,20 @@
       <AddingJob />
     </div>
     <JobsCard />
-
+<JobStatus/>
   </div>
 </template>
 
 <script>
   import JobsCard from './components/JobsCard.vue';
   import AddingJob from './components/AddingJob.vue';
+  import JobStatus from './components/JobStatus.vue';
   export default{
     name:'App',
     components:{
       JobsCard,
-      AddingJob
-
+      AddingJob,
+     JobStatus
     }
   }
 </script>
