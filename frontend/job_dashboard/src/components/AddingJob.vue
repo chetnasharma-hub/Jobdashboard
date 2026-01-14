@@ -85,29 +85,50 @@ export default {
       this.selectedFile=event.target.files[0]
 
     },
-    async add_job(){
-      console.log(this.job)
-      const formData = new FormData()
-      
-      formData.append("title",this.job.title);
-      formData.append("status",this.job.status);
-      formData.append("category",this.job.category);
-      formData.append("city",this.job.city);
-      formData.append("state",this.job.state);
-      formData.append("start_date",this.job.start_date);
-      formData.append("end_date",this.job.end_date);
-      formData.append("description",this.job.description);
-      formData.append("job_profile_pic", this.selectedFile);
+ async add_job() {
+  try {
+    const formData = new FormData()
 
-      axios.post('http://localhost:8000/api/jobs/', formData,{
-        headers:{ "Content-Type": "multipart/form-data" }
-      })
+    formData.append("title", this.job.title)
+    formData.append("status", this.job.status)
+    formData.append("category", this.job.category)
+    formData.append("address", this.job.address)
+    formData.append("city", this.job.city)
+    formData.append("state", this.job.state)
+    formData.append("start_date", this.job.start_date)
+    formData.append("end_date", this.job.end_date)
+    formData.append("description", this.job.description)
 
-      .then (res =>{
-        console.log(res)
-      })
-  
-    },
+    if (this.selectedFile) {
+      formData.append("job_profile_pic", this.selectedFile)
+    }
+
+    const res = await axios.post(
+      "http://localhost:8000/api/jobs/",
+      formData,
+      { headers: { "Content-Type": "multipart/form-data" } }
+    )
+
+    console.log("SUCCESS:", res.data)
+    alert("Job added successfully")
+    const response = await axios.get("http://localhost:8000/api/jobs/")
+    this.list = response.data
+
+  } catch (error) {
+    if (error.response) {
+      console.log("BACKEND ERROR:", error.response.data)
+
+      if (error.response.data.non_field_errors) {
+        alert(error.response.data.non_field_errors[0])
+      } else {
+        alert(JSON.stringify(error.response.data))
+      }
+    } else {
+      alert("Server not responding")
+    }
+  }
+}
+
   }
  
 

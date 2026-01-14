@@ -5,10 +5,10 @@ class Job(models.Model):
     job_profile_pic=models.ImageField(upload_to="job_pic/",null=True,blank=True)
     title = models.CharField(max_length=200)
     STATUS = [
-        ('draft', 'Draft'),
-        ('requested', 'Requested'),
-        ('posted', 'Posted'),
-        ('filled', 'Filled'),
+        ('Draft', 'Draft'),
+        ('Requested', 'Requested'),
+        ('Posted', 'Posted'),
+        ('Filled', 'Filled'),
     ]
     status = models.CharField( max_length=20, choices=STATUS, default='draft')        
     
